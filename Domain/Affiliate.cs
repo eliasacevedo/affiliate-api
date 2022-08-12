@@ -16,7 +16,7 @@ public class Affiliate: IBaseEntity {
     public string PhoneNumber {get; set;}
     public string SocialSecurity {get; set;}
     public DateTime RegistryDate {get; set;}
-    public string ConsumedAmount {get; set;}
+    public double ConsumedAmount {get; set;}
     public string PlanId {get; set;}
     public string StatusId {get; set;}
 }

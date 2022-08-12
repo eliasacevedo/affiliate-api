@@ -14,5 +14,26 @@ public class Affiliate: IBaseModel {
     public int PlanId {get; set;}
     public int StatusId {get; set;}
 
+    public Domain.Affiliate Domain { 
+        get {
+            return new Domain.Affiliate
+            {
+                Id = Id.ToString(),
+                Firstname = Firstname,
+                Lastname = Lastname,
+                BirthDate = BirthDate,
+                Sex = Sex,
+                IdentificationId = IdentificationId,
+                PhoneNumber = PhoneNumber,
+                SocialSecurity = SocialSecurity,
+                RegistryDate = RegistryDate,
+                ConsumedAmount = ConsumedAmount,
+                PlanId = PlanId.ToString(),
+                StatusId = StatusId.ToString(),
+
+            };
+        } 
+    }
+
 
 }

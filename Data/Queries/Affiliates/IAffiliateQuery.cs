@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace Data.Queries.Affiliates
 {
-    public interface IAffiliateQuery
+    public interface IAffiliateQuery: IBaseQuery<Affiliate>
     {
-        bool AddAmount(AffiliateConsumedAmount consumedAmount);
+        Task<IEnumerable<Affiliate>> Get(Domain.Affiliate filter);
+        Task<bool> AddAmount(AffiliateConsumedAmount consumedAmount);
     }
 }

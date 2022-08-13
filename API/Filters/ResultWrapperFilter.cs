@@ -13,9 +13,9 @@ public class ResultWrapperlAttribute : ActionFilterAttribute
         }
 
         object result;
-        if (context.Result == null)
+        if (context.Result == null || context.Result is EmptyResult)
         {
-            result = new BaseResult(null);
+            result = new BaseResult();
         }
         else
         {

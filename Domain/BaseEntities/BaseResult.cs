@@ -8,6 +8,13 @@ namespace Domain.BaseEntities
 {
     public class BaseResult
     {
+        public BaseResult()
+        {
+            this.Data = null;
+            Success = true;
+            Message = "";
+            Code = 200;
+        }
         public BaseResult(object? Data)
         {
             this.Data = Data;

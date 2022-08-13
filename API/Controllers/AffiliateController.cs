@@ -10,9 +10,9 @@ namespace API.Controllers;
 [Route("[controller]")]
 public class AffiliateController : ControllerBase
 {
-    private readonly ILogger<WeatherForecastController> _logger;
+    private readonly ILogger<AffiliateController> _logger;
     private readonly IAffiliateLogic affiliateLogic;
-    public AffiliateController(ILogger<WeatherForecastController> logger, IAffiliateLogic affiliateLogic)
+    public AffiliateController(ILogger<AffiliateController> logger, IAffiliateLogic affiliateLogic)
     {
         _logger = logger;
         this.affiliateLogic = affiliateLogic;

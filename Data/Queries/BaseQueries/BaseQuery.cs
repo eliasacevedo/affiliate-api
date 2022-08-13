@@ -22,29 +22,13 @@ public class BaseQuery<T> : IBaseQuery<T>
     public async Task<bool> BaseSqlExecute(string connectionStringName, string sql, object? sqlParams = null)
     {
         var conn = manager.GetSqlConnection(connectionStringName);
-        try
-        {
-            await conn.ExecuteAsync(sql, sqlParams);
-            return true;
-        }
-        catch
-        {
-            // add log
-            return false;
-        }
+        await conn.ExecuteAsync(sql, sqlParams);
+        return true;
     }
     public async Task<IEnumerable<T>> BaseSqlQuery(string connectionStringName, string sql, object? sqlParams = null)
     {
         var conn = manager.GetSqlConnection(connectionStringName);
-        try
-        {
-            return await conn.QueryAsync<T>(sql, sqlParams);
-        }
-        catch
-        {
-            // add log
-            return new List<T>();
-        }
+        return await conn.QueryAsync<T>(sql, sqlParams);
     }
 
 

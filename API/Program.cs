@@ -1,3 +1,4 @@
+using API.Filters;
 using Business.Business.Affiliates;
 using Data.Config;
 using Data.Queries.Affiliates;
@@ -5,7 +6,13 @@ using Data.Queries.Affiliates;
 var  AllOrigins = "AllOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers();
+builder.Services.AddControllers(configure =>
+{
+    configure.Filters.Add<ResultWrapperlAttribute>();
+    configure.Filters.Add<ExceptionFilter>();
+    configure.Filters.Add<ModelValidatorFilter>();
+    
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Queries\Estatus\" />
     <Folder Include="Queries\Plans\" />
   </ItemGroup>
 

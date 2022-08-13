@@ -24,7 +24,11 @@ namespace Data.Queries.Affiliates
 
         public async Task<IEnumerable<Affiliate>> Get(Affiliate filter)
         {
-            string sql = $"select * from affiliate where IdentificationId like '%@IdentificationId%' and Firstname like '%@Firstname%' and Lastname like '%@Lastname%'";
+            string identificationIdParam = filter.IdentificationId != null && filter.IdentificationId.Length > 0 ? "and IdentificationId like '%@IdentificationId%'" : "";
+            string firstnameParam = filter.Firstname != null && filter.Firstname.Length > 0 ? "and Firstname like '%@Firstname%'" : "";
+            string lastnameParam = filter.Lastname != null && filter.Lastname.Length > 0 ? "and Lastname like '%@Lastname%'" : "";
+            string conditional = $"where 1=1 {identificationIdParam} {firstnameParam} {lastnameParam}";
+            string sql = $"select * from affiliate {conditional}";
             var r = await BaseSqlQuery(ConnectionStringNames.Default, sql, filter);
             return r;
         }

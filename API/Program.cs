@@ -1,5 +1,6 @@
 using API.Filters;
 using Business.Business.Affiliates;
+using Business.Business.Estatus;
 using Data.Config;
 using Data.Queries.Affiliates;
 
@@ -17,6 +18,8 @@ builder.Services.AddControllers(configure =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton<IEstatusQuery, EstatusQuery>();
+builder.Services.AddSingleton<IEstatusLogic, EstatusLogic>();
 builder.Services.AddSingleton<IAffiliateQuery, AffiliateQuery>();
 builder.Services.AddSingleton<IAffiliateLogic, AffiliateLogic>();
 
@@ -24,7 +27,7 @@ builder.Services.AddSingleton<ConnectionStringManager>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: AllOrigins, policy => {policy.WithOrigins("*");});
+    options.AddPolicy(name: AllOrigins, policy => {policy.AllowAnyOrigin().AllowAnyHeader();});
 });
 
 var app = builder.Build();

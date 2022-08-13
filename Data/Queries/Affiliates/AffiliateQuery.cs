@@ -24,13 +24,30 @@ namespace Data.Queries.Affiliates
 
         public async Task<IEnumerable<Affiliate>> Get(Affiliate filter)
         {
-            string identificationIdParam = filter.IdentificationId != null && filter.IdentificationId.Length > 0 ? "and IdentificationId like '%@IdentificationId%'" : "";
-            string firstnameParam = filter.Firstname != null && filter.Firstname.Length > 0 ? "and Firstname like '%@Firstname%'" : "";
-            string lastnameParam = filter.Lastname != null && filter.Lastname.Length > 0 ? "and Lastname like '%@Lastname%'" : "";
+            string identificationIdParam = "";
+            if (filter.IdentificationId != null && filter.IdentificationId.Length > 0)
+            {
+                filter.IdentificationId = $"%{filter.IdentificationId}%";
+                identificationIdParam = "and identificationId like @IdentificationId";
+            }
+
+            string firstnameParam = "";
+            if (filter.Firstname != null && filter.Firstname.Length > 0)
+            {
+                filter.Firstname = $"%{filter.Firstname}%";
+                firstnameParam = "and firstname like @Firstname";
+            }
+
+            string lastnameParam = "";
+            if (filter.Lastname != null && filter.Lastname.Length > 0)
+            {
+                filter.Lastname = $"%{filter.Lastname}%";
+                lastnameParam = "and lastname like @Lastname";
+            }
+
             string conditional = $"where 1=1 {identificationIdParam} {firstnameParam} {lastnameParam}";
             string sql = $"select * from affiliate {conditional}";
-            var r = await BaseSqlQuery(ConnectionStringNames.Default, sql, filter);
-            return r;
+            return await BaseSqlQuery(ConnectionStringNames.Default, sql, filter);
         }
 
         public virtual async Task<bool> Update(Affiliate model)

@@ -18,7 +18,13 @@ namespace Data.Queries.Affiliates
 
         public async Task<IEnumerable<GeneralEstatus>> Get(GeneralEstatus filter)
         {
-            string sql = $"select * from generalstatus where 1=1 {(filter.Id > 0 ? "and id = @Id ": "")} {(filter.Estatus != null && filter.Estatus.Length > 0 ? "and estatus like '%@Estatus%'" : "")}";
+            var statusParam = "";
+            if (filter.Estatus != null && filter.Estatus.Length > 0)
+            {
+                filter.Estatus = $"%{filter.Estatus}%";
+                statusParam = "and estatus like @Estatus";
+            }
+            string sql = $"select * from generalstatus where 1=1 {(filter.Id > 0 ? "and id = @Id ": "")} {statusParam}";
             var r = await BaseSqlQuery(ConnectionStringNames.Default, sql, filter);
             return r;
         }

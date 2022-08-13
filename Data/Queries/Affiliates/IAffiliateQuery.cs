@@ -1,5 +1,5 @@
 ﻿using Data.Models;
-using Data.Models.Affiliate;
+using Data.Models.Affiliates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,9 @@ namespace Data.Queries.Affiliates
 {
     public interface IAffiliateQuery: IBaseQuery<Affiliate>
     {
-        Task<IEnumerable<Affiliate>> Get(Domain.Affiliate filter);
+        Task<IEnumerable<Affiliate>> Get(Affiliate filter);
+        Task<bool> Update(Affiliate model);
+        Task<bool> Create(Affiliate model);
         Task<bool> AddAmount(AffiliateConsumedAmount consumedAmount);
     }
 }

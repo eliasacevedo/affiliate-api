@@ -1,4 +1,4 @@
-﻿namespace Data.Models.Affiliate;
+﻿namespace Data.Models.Affiliates;
 
 public class AffiliateConsumedAmount
 {

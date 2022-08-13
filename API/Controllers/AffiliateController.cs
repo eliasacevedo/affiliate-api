@@ -1,6 +1,7 @@
 using Business.Business.Affiliates;
 using Domain;
 using DTOs;
+using DTOs.Affiliates;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -21,5 +22,23 @@ public class AffiliateController : ControllerBase
     public async Task<IEnumerable<Affiliate>> Get([FromQuery]SearchFilterAffiliatePage? filter)
     {
         return await affiliateLogic.GetAffiliates(filter);
+    }
+
+    [HttpPost("Insert")]
+    public async Task Post([FromBody] Affiliate affiliate)
+    {
+        await affiliateLogic.CreateAffiliate(affiliate);
+    }
+
+    [HttpPost("Update")]
+    public async Task Update([FromBody] Affiliate affiliate)
+    {
+        await affiliateLogic.UpdateAffiliate(affiliate);
+    }
+
+    [HttpPost("AddAmount")]
+    public async Task AddAmount([FromBody] AmountConsumedAffiliate affiliate)
+    {
+        await affiliateLogic.AddConsumedAmount(affiliate);
     }
 }

@@ -11,41 +11,12 @@ using System.Threading.Tasks;
 
 namespace Data.BaseQueries;
 
-public class BaseQuery<T>: IBaseQuery<T>
+public class BaseQuery<T> : IBaseQuery<T>
 {
     private readonly ConnectionStringManager manager;
     public BaseQuery(ConnectionStringManager manager)
     {
         this.manager = manager;
-    }
-    public virtual async Task<bool> Create(T model)
-    {
-        if (model == null)
-        {
-            throw new ArgumentNullException("model param is missing");
-        }
-
-        var modelName = nameof(model);
-        var sql = $"exec {modelName}Insert";
-        return await BaseSqlExecute(ConnectionStringNames.Default, sql, model);
-    }
-
-
-    public virtual async Task<IEnumerable<T>> Get(object? filter)
-    {
-        throw new NotImplementedException();
-    }
-
-    public virtual async Task<bool> Update(T model)
-    {
-        if (model == null)
-        {
-            throw new ArgumentNullException("model param is missing");
-        }
-
-        var modelName = model.GetType().Name;
-        var sql = $"exec {modelName}Update";
-        return await BaseSqlExecute(ConnectionStringNames.Default, sql, model);
     }
 
     public async Task<bool> BaseSqlExecute(string connectionStringName, string sql, object? sqlParams = null)
@@ -76,8 +47,5 @@ public class BaseQuery<T>: IBaseQuery<T>
         }
     }
 
-    public Task<IEnumerable<T>> Get<Filter>(Filter? filter)
-    {
-        throw new NotImplementedException();
-    }
+
 }

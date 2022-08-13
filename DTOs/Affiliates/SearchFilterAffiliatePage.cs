@@ -17,4 +17,14 @@ public class SearchFilterAffiliatePage
         };
     }
 
+    public Data.Models.Affiliates.Affiliate ToData()
+    {
+        return new Data.Models.Affiliates.Affiliate()
+        {
+            Firstname = Firstname,
+            Lastname = Lastname,
+            IdentificationId = IdentificationId
+        };
+    }
+
 }
